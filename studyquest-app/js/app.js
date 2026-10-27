@@ -1,6 +1,7 @@
 /**
- * StudyQuest - Mobile Web & PWA Core Engine
- * Implements 5-Minute Procrastination Breakthrough, Pomodoro, EXP Gamification, Guilt-Free Rewards & Accountability
+ * StudyQuest - Responsive Web Application Engine
+ * Supports seamless desktop, tablet, and mobile views with PWA capabilities.
+ * Implements 5-Minute Procrastination Breakthrough, Pomodoro, EXP Gamification, Guilt-Free Rewards & Accountability.
  */
 
 // ============================================================================
@@ -13,7 +14,7 @@ const DEFAULT_STATE = {
     levelName: "Thợ Săn Deadline",
     currentExp: 150,
     maxExp: 300,
-    availableExp: 200, // Quỹ giải trí khả dụng (đổi ra phút: 200 EXP = 40 phút)
+    availableExp: 200, // Quỹ giải trí: 200 EXP = 40 phút giải trí
     streakDays: 4
   },
   currentFocusTaskId: 2,
@@ -66,7 +67,7 @@ const DEFAULT_STATE = {
   ],
   buddy: {
     name: "@Minh",
-    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80",
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&auto=format&fit=crop&q=80",
     completedTasks: 2,
     totalTasks: 3,
     currentFocus: "Viết dàn ý đề cương chi tiết (25m)",
@@ -95,7 +96,6 @@ function saveState() {
   }
 }
 
-// Level Names Hierarchy
 const LEVEL_TITLES = [
   "Tân Binh Khởi Động", // Lv 1
   "Thợ Săn Deadline",    // Lv 2
@@ -105,7 +105,7 @@ const LEVEL_TITLES = [
 ];
 
 // ============================================================================
-// 2. SYNTHETIC SOUND & AUDIO ENGINE (Web Audio API)
+// 2. SYNTHETIC AUDIO ENGINE (Web Audio API)
 // ============================================================================
 let audioCtx = null;
 let ambientOsc = null;
@@ -216,7 +216,7 @@ const SoundEngine = {
       let lastOut = 0.0;
       for (let i = 0; i < bufferSize; i++) {
         const white = Math.random() * 2 - 1;
-        output[i] = (lastOut + (0.02 * white)) / 1.02; // Pink-ish rain noise
+        output[i] = (lastOut + (0.02 * white)) / 1.02;
         lastOut = output[i];
       }
       const whiteNoise = ctx.createBufferSource();
@@ -261,25 +261,24 @@ const ConfettiEngine = {
 
   resize() {
     if (!this.canvas) return;
-    const parent = this.canvas.parentElement;
-    this.canvas.width = parent.clientWidth;
-    this.canvas.height = parent.clientHeight;
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
   },
 
   fire() {
     this.init();
     if (!this.ctx) return;
     const colors = ['#0284C7', '#38BDF8', '#F59E0B', '#10B981', '#EC4899', '#8B5CF6'];
-    for (let i = 0; i < 70; i++) {
+    for (let i = 0; i < 80; i++) {
       this.particles.push({
         x: this.canvas.width / 2,
         y: this.canvas.height / 3,
-        vx: (Math.random() - 0.5) * 8,
-        vy: (Math.random() - 0.8) * 10,
-        size: Math.random() * 8 + 4,
+        vx: (Math.random() - 0.5) * 10,
+        vy: (Math.random() - 0.8) * 12,
+        size: Math.random() * 9 + 4,
         color: colors[Math.floor(Math.random() * colors.length)],
         rotation: Math.random() * 360,
-        vRot: (Math.random() - 0.5) * 10,
+        vRot: (Math.random() - 0.5) * 12,
         opacity: 1
       });
     }
@@ -295,7 +294,7 @@ const ConfettiEngine = {
       const p = this.particles[i];
       p.x += p.vx;
       p.y += p.vy;
-      p.vy += 0.25; // gravity
+      p.vy += 0.28;
       p.rotation += p.vRot;
       p.opacity -= 0.012;
 
@@ -329,7 +328,7 @@ function showToast(text, icon = '✨') {
   if (!container) return;
   const toast = document.createElement('div');
   toast.className = 'toast-msg';
-  toast.innerHTML = `<span class="toast-icon">${icon}</span><span>${text}</span>`;
+  toast.innerHTML = `<span>${icon}</span><span>${text}</span>`;
   container.appendChild(toast);
   setTimeout(() => {
     toast.remove();
@@ -371,8 +370,7 @@ const FocusTimer = {
         "Hãy vươn vai, uống nước và rời mắt khỏi màn hình một chút nhé!";
     }
 
-    // Update active pill
-    document.querySelectorAll('.mode-pill').forEach(pill => {
+    document.querySelectorAll('.mode-tab-item').forEach(pill => {
       pill.classList.toggle('active', pill.dataset.mode === newMode);
     });
 
@@ -383,8 +381,10 @@ const FocusTimer = {
     if (this.isRunning) return;
     this.isRunning = true;
     SoundEngine.click();
-    document.getElementById('btnTimerLabel').innerText = "TẠM DỪNG";
-    document.getElementById('btnTimerIcon').innerText = "⏸";
+    const lbl = document.getElementById('btnTimerLabel');
+    const icn = document.getElementById('btnTimerIcon');
+    if (lbl) lbl.innerText = "TẠM DỪNG";
+    if (icn) icn.innerText = "⏸";
 
     this.interval = setInterval(() => {
       if (this.remainingSeconds > 0) {
@@ -401,8 +401,10 @@ const FocusTimer = {
     SoundEngine.click();
     clearInterval(this.interval);
     this.interval = null;
-    document.getElementById('btnTimerLabel').innerText = "TIẾP TỤC";
-    document.getElementById('btnTimerIcon').innerText = "▶";
+    const lbl = document.getElementById('btnTimerLabel');
+    const icn = document.getElementById('btnTimerIcon');
+    if (lbl) lbl.innerText = "TIẾP TỤC";
+    if (icn) icn.innerText = "▶";
   },
 
   toggle() {
@@ -419,11 +421,10 @@ const FocusTimer = {
     const displayEl = document.getElementById('timerDisplay');
     if (displayEl) displayEl.innerText = `${mins}:${secs}`;
 
-    // SVG Circular Progress
     const circle = document.getElementById('timerProgressCircle');
     if (circle) {
-      const radius = 115;
-      const circumference = 2 * Math.PI * radius; // ~722.56
+      const radius = 135;
+      const circumference = 2 * Math.PI * radius; // ~848.23
       const fraction = this.remainingSeconds / this.totalSeconds;
       const offset = circumference * (1 - fraction);
       circle.style.strokeDasharray = `${circumference}`;
@@ -438,13 +439,11 @@ const FocusTimer = {
     if (this.mode === '5min') {
       showToast("🎉 Hoàn thành 5 phút khởi động! Bạn đã chiến thắng sức ì!", "🏆");
       ConfettiEngine.fire();
-      // Prompt user to choose
     } else if (this.mode === '25min') {
       awardExp(50, "Hoàn thành phiên tập trung 25 phút!");
       showToast("🔥 Xuất sắc! Nhận ngay +50 EXP vào quỹ giải trí!", "⚡");
       ConfettiEngine.fire();
       
-      // Auto complete the task if selected
       if (appState.currentFocusTaskId) {
         const task = appState.tasks.find(t => t.id === appState.currentFocusTaskId);
         if (task && task.status !== 'done') {
@@ -466,7 +465,6 @@ function awardExp(amount, reason = "") {
   appState.user.currentExp += amount;
   appState.user.availableExp += amount;
 
-  // Level Up Check
   if (appState.user.currentExp >= appState.user.maxExp) {
     appState.user.level += 1;
     appState.user.currentExp = appState.user.currentExp - appState.user.maxExp;
@@ -491,12 +489,10 @@ function redeemReward(id, title, minutes, cost) {
     return;
   }
 
-  // Deduct EXP
   appState.user.availableExp -= cost;
   saveState();
   renderUI();
 
-  // Show Guilt-Free Pass Modal
   const modal = document.getElementById('modalRewardPass');
   const iconEl = document.getElementById('passRewardIcon');
   const titleEl = document.getElementById('passRewardTitle');
@@ -519,7 +515,6 @@ function redeemReward(id, title, minutes, cost) {
   SoundEngine.success();
   ConfettiEngine.fire();
 
-  // Start leisure countdown
   startLeisureCountdown(minutes * 60);
 }
 
@@ -573,7 +568,6 @@ function startTaskInFocus(taskId) {
   task.status = 'doing';
   saveState();
 
-  // Switch to Focus Screen
   switchScreen('screenFocus');
   FocusTimer.setMode('5min');
   FocusTimer.start();
@@ -604,7 +598,7 @@ function moveTaskColumn(taskId, newStatus) {
   renderUI();
 }
 
-// Micro-breakdown Presets (Cirillo Pomodoro micro-tasking)
+// Micro-breakdown Presets
 const BREAKDOWN_PRESETS = {
   essay: [
     { title: "Đọc đề & gạch ý chính", subject: "Tiểu luận" },
@@ -651,13 +645,13 @@ function renderBreakdownPreview() {
   container.innerHTML = currentBreakdownList.map((item, idx) => `
     <div class="breakdown-item">
       <span><strong>${idx + 1}.</strong> ${item.title}</span>
-      <span class="preview-badge">+50 EXP</span>
+      <span class="badge-gold-pill">+50 EXP</span>
     </div>
   `).join('');
 }
 
 // ============================================================================
-// 8. BUDDY & SOCIAL ACCOUNTABILITY
+// 8. BUDDY & ACCOUNTABILITY
 // ============================================================================
 function sendSelectedPing(message) {
   SoundEngine.click();
@@ -667,14 +661,14 @@ function sendSelectedPing(message) {
   const pingModal = document.getElementById('modalPing');
   if (pingModal) pingModal.classList.remove('active');
 
-  const pingContainer = document.getElementById('lastPingText');
-  if (pingContainer) {
-    pingContainer.innerHTML = `<strong>Bạn:</strong> "${message}"`;
-  }
+  const p1 = document.getElementById('lastPingText');
+  const p2 = document.getElementById('lastPingTextFull');
+  const content = `<strong>Bạn:</strong> "${message}"`;
+  if (p1) p1.innerHTML = content;
+  if (p2) p2.innerHTML = content;
 
   showToast(`Đã gửi Ping đến ${appState.buddy.name}: "${message}"`, "📢");
 
-  // Bot & Buddy auto reply after 2.5 seconds
   setTimeout(() => {
     const replies = [
       "Nhận được ping rồi nhé! Đang cày deadline cùng bạn nè! 🔥",
@@ -685,9 +679,9 @@ function sendSelectedPing(message) {
     const reply = replies[Math.floor(Math.random() * replies.length)];
     appState.buddy.lastPing = `@Minh: "${reply}"`;
     saveState();
-    if (pingContainer) {
-      pingContainer.innerHTML = `<strong>@Minh:</strong> "${reply}"`;
-    }
+    const replyContent = `<strong>@Minh:</strong> "${reply}"`;
+    if (p1) p1.innerHTML = replyContent;
+    if (p2) p2.innerHTML = replyContent;
     SoundEngine.success();
     showToast(`@Minh vừa phản hồi: "${reply}"`, "💬");
   }, 2500);
@@ -703,7 +697,7 @@ function renderUI() {
   if (nameEl) nameEl.innerText = appState.user.name;
   if (badgeEl) badgeEl.innerText = `${appState.user.levelName} (Lv. ${appState.user.level})`;
 
-  // 2. EXP Progress Card
+  // 2. EXP Progress
   const progressText = document.getElementById('expProgressText');
   const progressBar = document.getElementById('expProgressBar');
   const restFund = document.getElementById('restFundText');
@@ -717,24 +711,25 @@ function renderUI() {
     progressBar.style.width = `${pct}%`;
   }
   if (restFund) {
-    // 200 EXP = 40 minutes (5 EXP = 1 minute)
     const minutes = Math.floor(appState.user.availableExp / 5);
     restFund.innerText = `${minutes} phút (${appState.user.availableExp} EXP)`;
   }
   if (streakText) {
-    streakText.innerText = `${appState.user.streakDays} ngày`;
+    streakText.innerText = `🔥 ${appState.user.streakDays} ngày`;
   }
 
   // 3. Shop Available EXP
   const shopExp = document.getElementById('shopAvailableExp');
+  const shopWidgetExp = document.getElementById('shopWidgetExp');
   const shopTime = document.getElementById('shopEquivTime');
   if (shopExp) shopExp.innerText = appState.user.availableExp;
+  if (shopWidgetExp) shopWidgetExp.innerText = `${appState.user.availableExp} EXP`;
   if (shopTime) {
     const minutes = Math.floor(appState.user.availableExp / 5);
     shopTime.innerText = `(~ ${minutes} phút giải trí)`;
   }
 
-  // 4. Focus Tasks List (Top 3 Focus Tasks)
+  // 4. Focus Tasks List
   const focusList = document.getElementById('focusTasksContainer');
   const top3Tasks = appState.tasks.filter(t => t.inTop3);
   const doneCount = top3Tasks.filter(t => t.status === 'done').length;
@@ -792,7 +787,6 @@ function renderKanban() {
   const doings = appState.tasks.filter(t => t.status === 'doing');
   const dones = appState.tasks.filter(t => t.status === 'done');
 
-  // Counters
   const cTodo = document.getElementById('badgeTodoCount');
   const cDoing = document.getElementById('badgeDoingCount');
   const cDone = document.getElementById('badgeDoneCount');
@@ -821,9 +815,9 @@ function renderKanban() {
     </div>
   `;
 
-  if (colTodo) colTodo.innerHTML = todos.map(renderCard).join('') || '<small style="color:#94A3B8;">Trống</small>';
-  if (colDoing) colDoing.innerHTML = doings.map(renderCard).join('') || '<small style="color:#94A3B8;">Trống</small>';
-  if (colDone) colDone.innerHTML = dones.map(renderCard).join('') || '<small style="color:#94A3B8;">Trống</small>';
+  if (colTodo) colTodo.innerHTML = todos.map(renderCard).join('') || '<small style="color:#94A3B8;">Chưa có việc nào</small>';
+  if (colDoing) colDoing.innerHTML = doings.map(renderCard).join('') || '<small style="color:#94A3B8;">Chưa có việc nào</small>';
+  if (colDone) colDone.innerHTML = dones.map(renderCard).join('') || '<small style="color:#94A3B8;">Chưa có việc nào</small>';
 }
 
 // ============================================================================
@@ -838,24 +832,44 @@ function switchScreen(targetScreenId) {
   const target = document.getElementById(targetScreenId);
   if (target) target.classList.add('active');
 
-  // Update Bottom Nav Tab Highlights
-  document.querySelectorAll('.nav-tab').forEach(tab => {
-    tab.classList.toggle('active', tab.dataset.screen === targetScreenId);
+  // Update Desktop Links
+  document.querySelectorAll('.nav-link-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.screen === targetScreenId);
   });
+
+  // Update Mobile Navigation Buttons
+  document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.screen === targetScreenId);
+  });
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize UI & Confetti
   renderUI();
   ConfettiEngine.init();
 
-  // Bottom Navigation Click Handlers
-  document.querySelectorAll('.nav-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      const screenId = tab.dataset.screen;
-      if (screenId) switchScreen(screenId);
+  // Desktop Nav Click
+  document.querySelectorAll('.nav-link-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const scr = btn.dataset.screen;
+      if (scr) switchScreen(scr);
     });
   });
+
+  // Mobile Bottom Nav Click
+  document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const scr = btn.dataset.screen;
+      if (scr) switchScreen(scr);
+    });
+  });
+
+  // Brand Logo Click -> Return to Home
+  const brandLogo = document.getElementById('brandLogoBtn');
+  if (brandLogo) {
+    brandLogo.addEventListener('click', () => switchScreen('screenHome'));
+  }
 
   // 5-Minute Rule Hero Banner
   const btnStart5Min = document.getElementById('btnStart5MinRule');
@@ -884,7 +898,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Decision 1: Nghỉ ngơi (Không có EXP) - Quyền dừng lại không tội lỗi
+  // Decision 1: Nghỉ ngơi (Không có EXP)
   const btnRest = document.getElementById('btnRestOption');
   if (btnRest) {
     btnRest.addEventListener('click', () => {
@@ -895,7 +909,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Decision 2: Làm tiếp (Vào 25m Pomodoro • Nhận 50 EXP)
+  // Decision 2: Làm tiếp (Vào 25m Pomodoro)
   const btnContinue = document.getElementById('btnContinueOption');
   if (btnContinue) {
     btnContinue.addEventListener('click', () => {
@@ -907,7 +921,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Timer Mode Switcher Pills
-  document.querySelectorAll('.mode-pill').forEach(pill => {
+  document.querySelectorAll('.mode-tab-item').forEach(pill => {
     pill.addEventListener('click', () => {
       SoundEngine.click();
       const mode = pill.dataset.mode;
@@ -916,9 +930,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Ambient Sounds
-  document.querySelectorAll('.ambient-chip').forEach(chip => {
+  document.querySelectorAll('.ambient-btn').forEach(chip => {
     chip.addEventListener('click', () => {
-      document.querySelectorAll('.ambient-chip').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.ambient-btn').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       const ambient = chip.dataset.ambient;
       SoundEngine.setAmbient(ambient);
@@ -926,20 +940,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Send Ping Modal Handlers
+  // Send Ping Handlers
   const btnSendPing = document.getElementById('btnSendPing');
+  const btnSendPingFull = document.getElementById('btnSendPingFull');
   const modalPing = document.getElementById('modalPing');
   const btnClosePing = document.getElementById('btnClosePing');
-  if (btnSendPing && modalPing) {
-    btnSendPing.addEventListener('click', () => {
-      SoundEngine.click();
-      modalPing.classList.add('active');
-    });
-  }
+
+  const openPingModal = () => {
+    SoundEngine.click();
+    if (modalPing) modalPing.classList.add('active');
+  };
+
+  if (btnSendPing) btnSendPing.addEventListener('click', openPingModal);
+  if (btnSendPingFull) btnSendPingFull.addEventListener('click', openPingModal);
   if (btnClosePing && modalPing) {
-    btnClosePing.addEventListener('click', () => {
-      modalPing.classList.remove('active');
-    });
+    btnClosePing.addEventListener('click', () => modalPing.classList.remove('active'));
   }
 
   const btnConfirmCustomPing = document.getElementById('btnConfirmSendCustomPing');
@@ -956,7 +971,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalBreakdown = document.getElementById('modalBreakdown');
   const btnOpenBreakdown1 = document.getElementById('btnOpenBreakdownModal');
   const btnOpenBreakdown2 = document.getElementById('btnAutoBreakdown');
-  const btnOpenBreakdown3 = document.getElementById('btnOpenBreakdownFromTasks');
   const btnCloseBreakdown = document.getElementById('btnCloseBreakdown');
   const btnCancelBreakdown = document.getElementById('btnCancelBreakdown');
   const btnSaveBreakdown = document.getElementById('btnSaveBreakdown');
@@ -969,10 +983,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (btnOpenBreakdown1) btnOpenBreakdown1.addEventListener('click', openBreakdown);
   if (btnOpenBreakdown2) btnOpenBreakdown2.addEventListener('click', openBreakdown);
-  if (btnOpenBreakdown3) btnOpenBreakdown3.addEventListener('click', openBreakdown);
-
-  if (btnCloseBreakdown) btnCloseBreakdown.addEventListener('click', () => modalBreakdown.classList.remove('active'));
-  if (btnCancelBreakdown) btnCancelBreakdown.addEventListener('click', () => modalBreakdown.classList.remove('active'));
+  if (btnCloseBreakdown && modalBreakdown) {
+    btnCloseBreakdown.addEventListener('click', () => modalBreakdown.classList.remove('active'));
+  }
+  if (btnCancelBreakdown && modalBreakdown) {
+    btnCancelBreakdown.addEventListener('click', () => modalBreakdown.classList.remove('active'));
+  }
 
   if (btnSaveBreakdown) {
     btnSaveBreakdown.addEventListener('click', () => {
@@ -985,7 +1001,7 @@ document.addEventListener('DOMContentLoaded', () => {
           duration: 25,
           exp: 50,
           status: 'todo',
-          inTop3: i < 2 // first two in top 3
+          inTop3: i < 2
         });
       });
       saveState();
@@ -997,7 +1013,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // New Task Modal
+  // New Task Modal Handlers
   const modalNewTask = document.getElementById('modalNewTask');
   const btnQuickAddTask = document.getElementById('btnQuickAddTask');
   const btnAddNewTaskModal = document.getElementById('btnAddNewTaskModal');
@@ -1007,13 +1023,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const openNewTask = () => {
     SoundEngine.click();
-    modalNewTask.classList.add('active');
+    if (modalNewTask) modalNewTask.classList.add('active');
   };
 
   if (btnQuickAddTask) btnQuickAddTask.addEventListener('click', openNewTask);
   if (btnAddNewTaskModal) btnAddNewTaskModal.addEventListener('click', openNewTask);
-  if (btnCloseNewTask) btnCloseNewTask.addEventListener('click', () => modalNewTask.classList.remove('active'));
-  if (btnCancelNewTask) btnCancelNewTask.addEventListener('click', () => modalNewTask.classList.remove('active'));
+  if (btnCloseNewTask && modalNewTask) {
+    btnCloseNewTask.addEventListener('click', () => modalNewTask.classList.remove('active'));
+  }
+  if (btnCancelNewTask && modalNewTask) {
+    btnCancelNewTask.addEventListener('click', () => modalNewTask.classList.remove('active'));
+  }
 
   if (btnSaveNewTask) {
     btnSaveNewTask.addEventListener('click', () => {
@@ -1049,18 +1069,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Guilt-Free Pass Modal Close
+  // Guilt-Free Pass Modal Handlers
   const btnCloseRewardPass = document.getElementById('btnCloseRewardPass');
   const btnFinishLeisure = document.getElementById('btnFinishLeisure');
   const modalRewardPass = document.getElementById('modalRewardPass');
 
-  if (btnCloseRewardPass) {
+  if (btnCloseRewardPass && modalRewardPass) {
     btnCloseRewardPass.addEventListener('click', () => {
       modalRewardPass.classList.remove('active');
       if (leisureInterval) clearInterval(leisureInterval);
     });
   }
-  if (btnFinishLeisure) {
+  if (btnFinishLeisure && modalRewardPass) {
     btnFinishLeisure.addEventListener('click', () => {
       modalRewardPass.classList.remove('active');
       if (leisureInterval) clearInterval(leisureInterval);
@@ -1075,18 +1095,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = prompt("Nhập tên phần thưởng giải trí của bạn:", "Ăn một cốc chè / trà sữa");
       if (!title) return;
       const mins = parseInt(prompt("Thời gian giải trí (phút):", "15") || "15", 10);
-      const cost = mins * 5; // 5 EXP per minute
+      const cost = mins * 5;
 
       const grid = document.getElementById('rewardsListContainer');
       const card = document.createElement('div');
-      card.className = 'reward-card';
+      card.className = 'reward-box-card';
       card.innerHTML = `
-        <div class="reward-icon-box">🎁</div>
-        <div class="reward-details">
-          <h4 class="reward-title">${title} / ${mins} phút</h4>
-          <span class="reward-cost">(Chi phí: ${cost} EXP)</span>
+        <div class="reward-icon-sq">🎁</div>
+        <div class="reward-info-sq">
+          <h4 class="reward-title-sq">${title} / ${mins} phút</h4>
+          <span class="reward-cost-sq">(Chi phí: ${cost} EXP)</span>
         </div>
-        <button class="btn-redeem" onclick="redeemReward('custom', '${title}', ${mins}, ${cost})">
+        <button class="btn-redeem-action" onclick="redeemReward('custom', '${title}', ${mins}, ${cost})">
           [ ĐỔI NGAY ]
         </button>
       `;
@@ -1096,32 +1116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Desktop Simulator Toolbar: Toggle Phone Bezel
-  const btnToggleFrame = document.getElementById('btnToggleFrame');
-  const devicePhone = document.getElementById('devicePhone');
-  if (btnToggleFrame && devicePhone) {
-    btnToggleFrame.addEventListener('click', () => {
-      devicePhone.classList.toggle('fullscreen-mode');
-      const isFull = devicePhone.classList.contains('fullscreen-mode');
-      btnToggleFrame.querySelector('.label').innerText = isFull ? 'Toàn màn hình' : 'Khung ĐT';
-      ConfettiEngine.resize();
-    });
-  }
-
-  // Desktop Simulator Toolbar: Reset Sample Data
-  const btnResetData = document.getElementById('btnResetData');
-  if (btnResetData) {
-    btnResetData.addEventListener('click', () => {
-      if (confirm("Khôi phục lại dữ liệu mẫu StudyQuest theo đúng bản mẫu prototype?")) {
-        appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
-        saveState();
-        renderUI();
-        showToast("Đã khôi phục dữ liệu mẫu Prototype!", "🔄");
-      }
-    });
-  }
-
-  // Desktop Simulator Toolbar: Sound Toggle
+  // Sound Toggle Button
   const btnToggleSound = document.getElementById('btnToggleSound');
   const soundIcon = document.getElementById('soundIcon');
   if (btnToggleSound) {
@@ -1133,18 +1128,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Update Status Bar Clock
-  const updateClock = () => {
-    const clock = document.getElementById('statusClock');
-    if (clock) {
-      const now = new Date();
-      const h = now.getHours().toString().padStart(2, '0');
-      const m = now.getMinutes().toString().padStart(2, '0');
-      clock.innerText = `${h}:${m}`;
+  // Reset Sample Data Button
+  const btnResetData = document.getElementById('btnResetData');
+  if (btnResetData) {
+    btnResetData.addEventListener('click', () => {
+      if (confirm("Khôi phục lại dữ liệu mẫu StudyQuest?")) {
+        appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+        saveState();
+        renderUI();
+        showToast("Đã khôi phục dữ liệu mẫu Prototype!", "🔄");
+      }
+    });
+  }
+
+  // Mobile Kanban column tab switching (only affects mobile screens <= 992px)
+  document.querySelectorAll('.mobile-kanban-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.mobile-kanban-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const targetCol = tab.dataset.col; // 'todo' | 'doing' | 'done'
+
+      if (window.innerWidth <= 992) {
+        document.getElementById('colTodo').style.display = targetCol === 'todo' ? 'block' : 'none';
+        document.getElementById('colDoing').style.display = targetCol === 'doing' ? 'block' : 'none';
+        document.getElementById('colDone').style.display = targetCol === 'done' ? 'block' : 'none';
+      }
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 992) {
+      const c1 = document.getElementById('colTodo');
+      const c2 = document.getElementById('colDoing');
+      const c3 = document.getElementById('colDone');
+      if (c1) c1.style.display = 'block';
+      if (c2) c2.style.display = 'block';
+      if (c3) c3.style.display = 'block';
     }
-  };
-  updateClock();
-  setInterval(updateClock, 30000);
+  });
 
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {
