@@ -1,6 +1,6 @@
 # 🎯 STUDYQUEST - ỨNG DỤNG ANDROID VƯỢT QUA TRÌ TRỆ HỌC TẬP
 
-Dự án ứng dụng di động **StudyQuest** được xây dựng chính xác dựa trên bản đặc tả **`Phototype/phototype.docx`** và bản thiết kế giao diện **Prototype Mobile UI**.
+
 
 ---
 
