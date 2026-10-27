@@ -1,0 +1,18 @@
+{
+  "name": "StudyQuest - Vượt Qua Trì Trệ & Gamify Học Tập",
+  "short_name": "StudyQuest",
+  "description": "Ứng dụng vượt qua trì trệ học tập theo quy tắc 5 phút, Pomodoro 25 phút, tích EXP và giải trí không tội lỗi",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F0F6FA",
+  "theme_color": "#0284C7",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
