@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">StudyQuest</string>
+    <string name="user_name">Minh</string>
+    <string name="level_badge">Thợ Săn Deadline (Lv. 2)</string>
+    <string name="rule_5min_title">QUY TẮC 5 PHÚT</string>
+    <string name="rule_5min_cta">BẮT ĐẦU 5 PHÚT NGAY</string>
+    <string name="rule_5min_sub">(Chỉ cần mở file và viết 1 dòng)</string>
+    <string name="today_focus_title">HÔM NAY (TOP 3 FOCUS TASKS)</string>
+    <string name="buddy_corner_title">GÓC ĐỒNG HÀNH</string>
+    <string name="shop_title">QUẦY ĐỔI GIẢI TRÍ \"KHÔNG TỘI LỖI\"</string>
+</resources>

@@ -1,0 +1,25 @@
+# OS & Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+.idea/
+.vscode/
+*.iml
+
+# Android Build
+.gradle/
+build/
+app/build/
+*.apk
+*.aab
+
+# Node & Temp
+node_modules/
+dist/
+*.log
+
+# Extracted Temp
+Phototype/extracted/
+Phototype/extract.ps1
+Phototype/document_plain.txt
