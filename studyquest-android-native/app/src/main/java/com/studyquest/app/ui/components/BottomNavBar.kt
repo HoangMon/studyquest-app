@@ -83,14 +83,14 @@ fun StudyQuestBottomBar(
 
             NavBarItem(
                 icon = Icons.Default.DateRange,
-                label = "Tasks",
+                label = "Nhiệm vụ",
                 selected = currentScreen == NavScreen.TASKS,
                 onClick = { onNavigate(NavScreen.TASKS) }
             )
 
             NavBarItem(
                 icon = Icons.Default.Group,
-                label = "Team / Shop",
+                label = "Đồng hành",
                 selected = currentScreen == NavScreen.TEAM_SHOP,
                 onClick = { onNavigate(NavScreen.TEAM_SHOP) }
             )

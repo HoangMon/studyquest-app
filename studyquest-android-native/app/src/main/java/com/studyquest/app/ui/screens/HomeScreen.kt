@@ -228,13 +228,13 @@ fun HomeScreen(
                             )
                         }
                         Text(
-                            text = "BẮT ĐẦU 5 PHÚT NGAY",
+                            text = "Bắt đầu 5 phút",
                             fontSize = 17.sp,
                             fontWeight = FontWeight.ExtraBold,
                             color = Color.White
                         )
                         Text(
-                            text = "(Chỉ cần mở file và viết 1 dòng)",
+                            text = "Chỉ cần mở file và viết 1 câu",
                             fontSize = 12.sp,
                             color = Color.White.copy(alpha = 0.9f)
                         )
@@ -251,13 +251,13 @@ fun HomeScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "📌 HÔM NAY (TOP 3 FOCUS TASKS)",
+                    text = "📌 MỤC TIÊU HÔM NAY (TOP 3)",
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = 13.sp,
                     color = NavyPrimary
                 )
                 Text(
-                    text = "${top3Tasks.count { it.status == TaskStatus.DONE }}/${top3Tasks.size} Task",
+                    text = "${top3Tasks.count { it.status == TaskStatus.DONE }}/${top3Tasks.size} việc",
                     fontSize = 11.sp,
                     color = BluePrimary,
                     fontWeight = FontWeight.Bold

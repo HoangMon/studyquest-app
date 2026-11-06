@@ -24,7 +24,7 @@
         <div class="brand-logo-icon">🎯</div>
         <div class="brand-text">
           <span class="brand-name">STUDY QUEST</span>
-          <span class="brand-tagline">Vượt qua trì trệ • Gamify học tập</span>
+          <span class="brand-tagline">Học tập trung • Gamify</span>
         </div>
       </div>
 
@@ -36,20 +36,24 @@
         </button>
         <button class="nav-link-btn" data-screen="screenFocus">
           <span class="nav-icon">⏱️</span>
-          <span>Đồng hồ 5 Phút</span>
+          <span>Đồng hồ 5M</span>
         </button>
         <button class="nav-link-btn" data-screen="screenTasks">
           <span class="nav-icon">📋</span>
-          <span>Bảng Kanban</span>
+          <span>Nhiệm vụ</span>
         </button>
         <button class="nav-link-btn" data-screen="screenBuddyShop">
           <span class="nav-icon">🤝</span>
-          <span>Đồng hành & Quầy thưởng</span>
+          <span>Đồng hành & Thưởng</span>
         </button>
       </nav>
 
       <!-- Right Utility Controls & User Profile -->
       <div class="nav-right-actions">
+        <button class="nav-tool-btn nav-feedback-btn" id="btnOpenFeedback" title="Đánh giá ứng dụng">
+          <span>⭐</span>
+          <span class="nav-feedback-text">Đánh giá</span>
+        </button>
         <button class="nav-tool-btn" id="btnToggleSound" title="Bật / Tắt âm thanh">
           <span id="soundIcon">🔊</span>
         </button>
@@ -78,21 +82,21 @@
           
           <!-- Left Column (Primary Focus: 5-Min Rule & Today's Top 3) -->
           <div class="dashboard-primary-col">
-            <!-- Hero Card: QUY TẮC 5 PHÚT (Vượt qua trì trệ) -->
+            <!-- Hero Card: QUY TẮC 5 PHÚT -->
             <div class="hero-rule-banner" id="btnStart5MinRule">
               <div class="hero-glow-layer"></div>
               <div class="hero-content-wrap">
                 <div class="hero-badge-row">
-                  <span class="hero-pill-tag">⚡ QUY TẮC 5 PHÚT (GOLLWITZER, 1999)</span>
-                  <span class="hero-click-hint">Bấm để bắt đầu ngay ➔</span>
+                  <span class="hero-pill-tag">⚡ QUY TẮC 5 PHÚT</span>
+                  <span class="hero-click-hint">Bắt đầu ngay ➔</span>
                 </div>
-                <h1 class="hero-heading">BẮT ĐẦU 5 PHÚT NGAY</h1>
-                <p class="hero-subtext">Chỉ cần mở file tài liệu và viết 1 dòng. Hết 5 phút, bạn có toàn quyền dừng lại hoặc tiếp tục mà không dằn vặt.</p>
+                <h1 class="hero-heading">BẮT ĐẦU 5 PHÚT</h1>
+                <p class="hero-subtext">Chỉ cần mở file và viết 1 câu. Hết 5 phút, bạn có thể dừng lại hoặc tiếp tục mà không áy náy.</p>
                 <div class="hero-action-row">
                   <button class="btn-hero-cta">
-                    <span>⏱️ Kích hoạt 5 phút vượt sức ì</span>
+                    <span>⏱️ Bắt đầu 5 phút</span>
                   </button>
-                  <span class="hero-stat-note">Hạ thấp ngưỡng bắt đầu đến mức không thể từ chối</span>
+                  <span class="hero-stat-note">Vượt qua sức ì tâm lý</span>
                 </div>
               </div>
             </div>
@@ -103,11 +107,11 @@
                 <div class="header-title-wrap">
                   <span class="header-icon">📌</span>
                   <div>
-                    <h2 class="card-main-title">HÔM NAY (TOP 3 FOCUS TASKS)</h2>
-                    <p class="card-sub-title">Chỉ chọn đúng 3 việc then chốt để giải phóng áp lực nhận thức</p>
+                    <h2 class="card-main-title">MỤC TIÊU HÔM NAY</h2>
+                    <p class="card-sub-title">Tập trung 3 việc quan trọng nhất</p>
                   </div>
                 </div>
-                <span class="badge-status-pill" id="focusCountBadge">2/3 Task</span>
+                <span class="badge-status-pill" id="focusCountBadge">2/3 việc</span>
               </div>
 
               <!-- List of Tasks -->
@@ -118,10 +122,10 @@
               <!-- Quick Action Buttons -->
               <div class="card-footer-actions">
                 <button class="btn-action-outline" id="btnOpenBreakdownModal">
-                  <span>🧩 Bẻ nhỏ bài tập lớn (Micro-Breakdown)</span>
+                  <span>🧩 Bẻ nhỏ bài tập</span>
                 </button>
                 <button class="btn-action-outline" id="btnQuickAddTask">
-                  <span>➕ Thêm task mới</span>
+                  <span>➕ Thêm việc</span>
                 </button>
               </div>
             </div>
@@ -130,10 +134,10 @@
             <div class="content-card psychology-card">
               <div class="psychology-header">
                 <span class="psychology-icon">💡</span>
-                <span class="psychology-title">Cơ sở khoa học về vượt qua trì trệ</span>
+                <span class="psychology-title">Mẹo tập trung</span>
               </div>
               <p class="psychology-desc">
-                Nghiên cứu của Cirillo (2018) và Gollwitzer (1999) chỉ ra: Bộ não con người né tránh các dự án đồ sộ vì cảm giác không biết bắt đầu từ đâu. Khi chia nhỏ thành phiên 5 phút và 25 phút, sức kháng cự tâm lý giảm hơn 80%.
+                Bộ não ngại việc lớn. Bắt đầu bằng 5 phút giúp giảm 80% sức ì trì hoãn.
               </p>
             </div>
           </div>
@@ -143,7 +147,7 @@
             <!-- Card 1: EXP Progress & Quỹ nghỉ giải trí -->
             <div class="content-card exp-card">
               <div class="exp-header-row">
-                <span class="exp-badge-title">TIẾN ĐỘ EXP</span>
+                <span class="exp-badge-title">CẤP ĐỘ & EXP</span>
                 <span class="exp-fraction" id="expProgressText">150 / 300 EXP</span>
               </div>
               <div class="progress-bar-container">
@@ -151,11 +155,11 @@
               </div>
               <div class="exp-details-grid">
                 <div class="exp-detail-box">
-                  <span class="detail-label">Quỹ nghỉ giải trí</span>
+                  <span class="detail-label">Quỹ giải trí</span>
                   <strong class="detail-val text-blue" id="restFundText">40 phút (200 EXP)</strong>
                 </div>
                 <div class="exp-detail-box">
-                  <span class="detail-label">Chuỗi chuyên cần</span>
+                  <span class="detail-label">Chuỗi ngày</span>
                   <strong class="detail-val text-gold" id="streakText">🔥 4 ngày</strong>
                 </div>
               </div>
@@ -166,20 +170,20 @@
               <div class="widget-header">
                 <div class="widget-title-wrap">
                   <span>💙</span>
-                  <h3 class="widget-title">GÓC ĐỒNG HÀNH</h3>
+                  <h3 class="widget-title">BẠN ĐỒNG HÀNH</h3>
                 </div>
                 <span class="online-indicator-pill">🟢 Đang học</span>
               </div>
               <div class="buddy-widget-body">
                 <div class="buddy-info-line">
-                  <strong>Bạn đồng hành: @Minh</strong>
-                  <span class="buddy-stat-tag">Đã xong: 2/3 task</span>
+                  <strong>@Minh</strong>
+                  <span class="buddy-stat-tag">Xong 2/3 việc</span>
                 </div>
                 <div class="buddy-quote-box" id="lastPingText">
                   <strong>@Minh:</strong> "Mình vừa giải quyết xong bài tập lớn Pháp luật ĐC rồi nhé, cố lên!"
                 </div>
                 <button class="btn-action-primary full-width" id="btnSendPing">
-                  <span>📢 [ Gửi Ping Đồng Đội ]</span>
+                  <span>📢 Gửi Ping</span>
                 </button>
               </div>
             </div>
@@ -189,23 +193,23 @@
               <div class="widget-header">
                 <div class="widget-title-wrap">
                   <span>🎮</span>
-                  <h3 class="widget-title">QUẦY ĐỔI GIẢI TRÍ</h3>
+                  <h3 class="widget-title">QUẦY GIẢI TRÍ</h3>
                 </div>
                 <span class="badge-gold-pill" id="shopWidgetExp">200 EXP</span>
               </div>
-              <p class="widget-subtext">Quy tắc "Không tội lỗi": Đã đổi EXP thì tận hưởng hết mình!</p>
+              <p class="widget-subtext">Đổi EXP lấy giờ giải trí chính đáng</p>
               <div class="shop-widget-items">
                 <div class="shop-mini-item">
                   <span>🎮 Game (20m)</span>
-                  <button class="btn-mini-redeem" onclick="redeemReward('game', 'Chơi 1 trận game', 20, 100)">Đổi 100 EXP</button>
+                  <button class="btn-mini-redeem" onclick="redeemReward('game', 'Chơi 1 trận game', 20, 100)">100 EXP</button>
                 </div>
                 <div class="shop-mini-item">
                   <span>🎬 Anime (25m)</span>
-                  <button class="btn-mini-redeem" onclick="redeemReward('anime', 'Xem 1 tập anime', 25, 125)">Đổi 125 EXP</button>
+                  <button class="btn-mini-redeem" onclick="redeemReward('anime', 'Xem 1 tập anime', 25, 125)">125 EXP</button>
                 </div>
                 <div class="shop-mini-item">
                   <span>☕ Cà phê/MXH (15m)</span>
-                  <button class="btn-mini-redeem" onclick="redeemReward('social', 'Lướt MXH / Cà phê', 15, 75)">Đổi 75 EXP</button>
+                  <button class="btn-mini-redeem" onclick="redeemReward('social', 'Lướt MXH / Cà phê', 15, 75)">75 EXP</button>
                 </div>
               </div>
             </div>
@@ -220,23 +224,23 @@
         <div class="focus-screen-wrapper">
           <div class="focus-top-actions">
             <button class="btn-back-home" id="btnExitFocus">
-              <span>✕ Thoát về trang chủ</span>
+              <span>✕ Về trang chủ</span>
             </button>
-            <div class="focus-badge-pill" id="focusModeBadge">QUY TẮC 5 PHÚT</div>
+            <div class="focus-badge-pill" id="focusModeBadge">5 PHÚT</div>
           </div>
 
           <!-- Target Objective Card -->
           <div class="content-card focus-target-card">
-            <span class="target-card-sub">🎯 MỤC TIÊU HIỆN TẠI</span>
+            <span class="target-card-sub">🎯 MỤC TIÊU</span>
             <h2 class="target-card-main" id="focusTargetTitle">Viết dàn ý đề cương chi tiết</h2>
-            <span class="target-card-meta" id="focusTargetMeta">Tư duy luận ĐC • Dự kiến 1 phiên 25m • +50 EXP</span>
+            <span class="target-card-meta" id="focusTargetMeta">Tư duy luận ĐC • 25m • +50 EXP</span>
           </div>
 
           <!-- Mode Selectors -->
           <div class="mode-tabs-row">
-            <button class="mode-tab-item active" data-mode="5min" id="pill5Min">Quy tắc 5 Phút Khởi Động</button>
-            <button class="mode-tab-item" data-mode="25min" id="pill25Min">Phiên Pomodoro 25 Phút</button>
-            <button class="mode-tab-item" data-mode="break" id="pillBreak">Nghỉ Ngơi 5 Phút</button>
+            <button class="mode-tab-item active" data-mode="5min" id="pill5Min">5 Phút</button>
+            <button class="mode-tab-item" data-mode="25min" id="pill25Min">25 Phút Pomodoro</button>
+            <button class="mode-tab-item" data-mode="break" id="pillBreak">Nghỉ 5M</button>
           </div>
 
           <!-- Giant Circular Countdown Display -->
@@ -247,7 +251,7 @@
             </svg>
             <div class="timer-inner-content">
               <div class="timer-clock-digits" id="timerDisplay">04:58</div>
-              <div class="timer-mode-caption" id="timerModeCaption">QUY TẮC 5 PHÚT KHỞI ĐỘNG</div>
+              <div class="timer-mode-caption" id="timerModeCaption">5 PHÚT KHỞI ĐỘNG</div>
               <div class="timer-pulse-dot"></div>
             </div>
           </div>
@@ -256,7 +260,7 @@
           <div class="calm-prompt-card">
             <span class="calm-icon">🕊️</span>
             <p class="calm-text" id="encourageText">
-              Bạn chỉ cần làm trong 5 phút. Hết giờ, bạn hoàn toàn có quyền dừng lại mà không có tội gì!
+              Chỉ cần làm 5 phút. Hết giờ, bạn có thể nghỉ mà không áy náy.
             </p>
           </div>
 
@@ -273,22 +277,22 @@
             <button class="decision-btn rest-choice" id="btnRestOption">
               <span class="choice-icon">🔴</span>
               <div class="choice-text">
-                <strong>Nghỉ ngơi</strong>
-                <small>(Không có EXP • Quyền dừng lại)</small>
+                <strong>Dừng lại</strong>
+                <small>Nghỉ ngơi</small>
               </div>
             </button>
             <button class="decision-btn continue-choice" id="btnContinueOption">
               <span class="choice-icon">🔥</span>
               <div class="choice-text">
                 <strong>Làm tiếp</strong>
-                <small>(Vào 25m Pomodoro • +50 EXP)</small>
+                <small>Pomodoro +50 EXP</small>
               </div>
             </button>
           </div>
 
           <!-- Ambient Sounds Bar -->
           <div class="ambient-sound-panel">
-            <span class="ambient-panel-label">🎧 Âm thanh hỗ trợ tập trung:</span>
+            <span class="ambient-panel-label">🎧 Âm thanh nền:</span>
             <div class="ambient-chip-list">
               <button class="ambient-btn active" data-ambient="none">Tắt</button>
               <button class="ambient-btn" data-ambient="rain">🌧️ Mưa rào</button>
@@ -304,15 +308,15 @@
       <section class="screen-view" id="screenTasks">
         <div class="tasks-page-header">
           <div>
-            <h1 class="page-title">NHIỆM VỤ & BẢNG KANBAN</h1>
-            <p class="page-subtitle">Bẻ nhỏ bài tập lớn 8-10 trang thành các thẻ 25 phút Pomodoro • Nhận 50 EXP mỗi thẻ</p>
+            <h1 class="page-title">NHIỆM VỤ</h1>
+            <p class="page-subtitle">Chia bài tập thành từng phiên 25 phút (+50 EXP)</p>
           </div>
           <div class="page-header-actions">
             <button class="btn-action-primary" id="btnAddNewTaskModal">
-              <span>➕ Tạo thẻ task mới</span>
+              <span>➕ Thêm việc</span>
             </button>
             <button class="btn-action-outline" id="btnAutoBreakdown">
-              <span>🧩 Bẻ nhỏ bài tập lớn</span>
+              <span>🧩 Bẻ nhỏ bài tập</span>
             </button>
           </div>
         </div>
@@ -340,7 +344,7 @@
             <div class="column-header">
               <div class="col-header-left">
                 <span class="col-indicator dot-blue"></span>
-                <h3 class="column-title">CẦN LÀM (TO DO)</h3>
+                <h3 class="column-title">CẦN LÀM</h3>
               </div>
               <span class="column-counter-badge" id="badgeTodoCount">2 việc</span>
             </div>
@@ -354,7 +358,7 @@
             <div class="column-header">
               <div class="col-header-left">
                 <span class="col-indicator dot-amber"></span>
-                <h3 class="column-title">ĐANG LÀM (IN PROGRESS)</h3>
+                <h3 class="column-title">ĐANG LÀM</h3>
               </div>
               <span class="column-counter-badge" id="badgeDoingCount">1 việc</span>
             </div>
@@ -368,7 +372,7 @@
             <div class="column-header">
               <div class="col-header-left">
                 <span class="col-indicator dot-green"></span>
-                <h3 class="column-title">HOÀN THÀNH (+50 EXP)</h3>
+                <h3 class="column-title">HOÀN THÀNH</h3>
               </div>
               <span class="column-counter-badge" id="badgeDoneCount">1 việc</span>
             </div>
@@ -390,8 +394,8 @@
               <div class="title-with-icon">
                 <span class="title-icon">💙</span>
                 <div>
-                  <h2 class="card-main-title">GÓC ĐỒNG HÀNH</h2>
-                  <p class="card-sub-title">Giám sát chéo và khích lệ từ bạn học • Bot tự động nhắc nhở</p>
+                  <h2 class="card-main-title">BẠN ĐỒNG HÀNH</h2>
+                  <p class="card-sub-title">Cùng học và nhắc nhở lẫn nhau</p>
                 </div>
               </div>
               <span class="online-indicator-pill">🟢 Đang học</span>
@@ -403,10 +407,10 @@
                 <span class="live-dot-badge"></span>
               </div>
               <div class="buddy-profile-text">
-                <h3 class="buddy-handle-name">Bạn đồng hành: @Minh</h3>
+                <h3 class="buddy-handle-name">@Minh</h3>
                 <div class="buddy-progress-bar-wrap">
                   <div class="progress-info-row">
-                    <span>Tiến độ hôm nay: <strong>2/3 task hoàn thành</strong></span>
+                    <span>Tiến độ hôm nay: <strong>2/3 việc</strong></span>
                     <span>67%</span>
                   </div>
                   <div class="progress-bar-container mini">
@@ -423,7 +427,7 @@
             <!-- Ping Action -->
             <div class="ping-trigger-box">
               <button class="btn-action-primary full-width" id="btnSendPingFull">
-                <span>📢 [ Gửi Ping Cho @Minh ]</span>
+                <span>📢 Gửi Ping cho @Minh</span>
               </button>
             </div>
 
@@ -451,8 +455,8 @@
               <div class="title-with-icon">
                 <span class="title-icon">🎮</span>
                 <div>
-                  <h2 class="card-main-title">QUẦY ĐỔI GIẢI TRÍ "KHÔNG TỘI LỖI"</h2>
-                  <p class="card-sub-title">Đã đổi EXP thì tận hưởng hết mình, tuyệt đối không dằn vặt!</p>
+                  <h2 class="card-main-title">QUẦY GIẢI TRÍ</h2>
+                  <p class="card-sub-title">Thưởng cho bản thân sau giờ học tập trung</p>
                 </div>
               </div>
             </div>
@@ -460,11 +464,11 @@
             <!-- Balance Banner -->
             <div class="shop-balance-banner-full">
               <div class="balance-info-left">
-                <span class="balance-caption">Chìm khử dụng / Khả dụng:</span>
+                <span class="balance-caption">Quỹ khả dụng:</span>
                 <div class="balance-display-row">
                   <strong class="balance-val" id="shopAvailableExp">200</strong>
                   <span class="balance-unit">EXP</span>
-                  <span class="balance-time-equiv" id="shopEquivTime">(~ 40 phút giải trí)</span>
+                  <span class="balance-time-equiv" id="shopEquivTime">(~ 40 phút)</span>
                 </div>
               </div>
               <div class="balance-coin-icon">🪙</div>
@@ -476,11 +480,11 @@
               <div class="reward-box-card" data-id="game" data-cost="100" data-minutes="20">
                 <div class="reward-icon-sq">🎮</div>
                 <div class="reward-info-sq">
-                  <h4 class="reward-title-sq">Chơi 1 trận game / 20 phút</h4>
-                  <span class="reward-cost-sq">(Chi phí: 100 EXP)</span>
+                  <h4 class="reward-title-sq">Chơi 1 trận game</h4>
+                  <span class="reward-cost-sq">20 phút • 100 EXP</span>
                 </div>
                 <button class="btn-redeem-action" onclick="redeemReward('game', 'Chơi 1 trận game', 20, 100)">
-                  [ ĐỔI NGAY ]
+                  Đổi ngay
                 </button>
               </div>
 
@@ -488,11 +492,11 @@
               <div class="reward-box-card" data-id="anime" data-cost="125" data-minutes="25">
                 <div class="reward-icon-sq">🎬</div>
                 <div class="reward-info-sq">
-                  <h4 class="reward-title-sq">Xem 1 tập anime / 25 phút</h4>
-                  <span class="reward-cost-sq">(Chi phí: 125 EXP)</span>
+                  <h4 class="reward-title-sq">Xem 1 tập anime</h4>
+                  <span class="reward-cost-sq">25 phút • 125 EXP</span>
                 </div>
                 <button class="btn-redeem-action" onclick="redeemReward('anime', 'Xem 1 tập anime', 25, 125)">
-                  [ ĐỔI NGAY ]
+                  Đổi ngay
                 </button>
               </div>
 
@@ -500,11 +504,11 @@
               <div class="reward-box-card" data-id="social" data-cost="75" data-minutes="15">
                 <div class="reward-icon-sq">☕</div>
                 <div class="reward-info-sq">
-                  <h4 class="reward-title-sq">Lướt MXH / Đi cà phê 15 phút</h4>
-                  <span class="reward-cost-sq">(Chi phí: 75 EXP)</span>
+                  <h4 class="reward-title-sq">Lướt MXH / Đi cà phê</h4>
+                  <span class="reward-cost-sq">15 phút • 75 EXP</span>
                 </div>
                 <button class="btn-redeem-action" onclick="redeemReward('social', 'Lướt MXH / Cà phê', 15, 75)">
-                  [ ĐỔI NGAY ]
+                  Đổi ngay
                 </button>
               </div>
 
@@ -512,18 +516,18 @@
               <div class="reward-box-card" data-id="music" data-cost="50" data-minutes="10">
                 <div class="reward-icon-sq">🎵</div>
                 <div class="reward-info-sq">
-                  <h4 class="reward-title-sq">Nghe nhạc lofi thư giãn / 10 phút</h4>
-                  <span class="reward-cost-sq">(Chi phí: 50 EXP)</span>
+                  <h4 class="reward-title-sq">Nghe nhạc thư giãn</h4>
+                  <span class="reward-cost-sq">10 phút • 50 EXP</span>
                 </div>
                 <button class="btn-redeem-action" onclick="redeemReward('music', 'Nghe nhạc chill', 10, 50)">
-                  [ ĐỔI NGAY ]
+                  Đổi ngay
                 </button>
               </div>
             </div>
 
             <!-- Add Custom Reward -->
             <button class="btn-add-custom-reward-btn" id="btnAddCustomReward">
-              <span>➕ Tự tạo phần thưởng giải trí của bạn</span>
+              <span>➕ Thêm phần thưởng</span>
             </button>
           </div>
 
@@ -546,50 +550,54 @@
     </button>
     <button class="mobile-nav-btn" data-screen="screenTasks">
       <span class="mobile-nav-icon">📋</span>
-      <span class="mobile-nav-text">Tasks</span>
+      <span class="mobile-nav-text">Nhiệm vụ</span>
     </button>
     <button class="mobile-nav-btn" data-screen="screenBuddyShop">
       <span class="mobile-nav-icon">🤝</span>
-      <span class="mobile-nav-text">Team/Shop</span>
+      <span class="mobile-nav-text">Đồng hành</span>
+    </button>
+    <button class="mobile-nav-btn" id="mobileBtnFeedback">
+      <span class="mobile-nav-icon">⭐</span>
+      <span class="mobile-nav-text">Góp ý</span>
     </button>
   </nav>
 
 
   <!-- ================= MODALS & POPUPS ================= -->
 
-  <!-- Modal 1: Bẻ Nhỏ Bài Tập Lớn (Micro-Breakdown Assistant) -->
+  <!-- Modal 1: Bẻ Nhỏ Bài Tập (Micro-Breakdown Assistant) -->
   <div class="modal-overlay" id="modalBreakdown">
     <div class="modal-window">
       <div class="modal-header">
         <div class="modal-title-wrap">
           <span class="modal-icon">🧩</span>
-          <h3 class="modal-title">BẺ NHỎ BÀI TẬP LỚN</h3>
+          <h3 class="modal-title">BẺ NHỎ BÀI TẬP</h3>
         </div>
         <button class="btn-close-modal" id="btnCloseBreakdown">✕</button>
       </div>
 
       <div class="modal-body">
         <p class="modal-intro">
-          Thay vì một đề bài mơ hồ gây trì trệ, hãy biến nó thành các thẻ hành động cụ thể 25 phút!
+          Chia đề bài lớn thành các phiên 25 phút dễ bắt đầu.
         </p>
 
         <div class="form-group">
-          <label class="form-label" for="inputBigProject">Tên bài tập lớn / Deadline:</label>
-          <input type="text" id="inputBigProject" class="form-input" placeholder="VD: Tiểu luận Pháp luật đại cương (8 trang, hạn 10 ngày)">
+          <label class="form-label" for="inputBigProject">Tên bài tập / Dự án:</label>
+          <input type="text" id="inputBigProject" class="form-input" placeholder="VD: Tiểu luận Pháp luật đại cương (8 trang)">
         </div>
 
         <div class="form-group">
-          <label class="form-label">Chọn gợi ý chia nhỏ mẫu hoặc tự soạn:</label>
+          <label class="form-label">Chọn gợi ý mẫu hoặc tự soạn:</label>
           <div class="preset-chips-wrap">
-            <button class="preset-chip-btn" onclick="applyBreakdownPreset('essay')">📝 Tiểu luận 8-10 trang</button>
-            <button class="preset-chip-btn" onclick="applyBreakdownPreset('coding')">💻 Đồ án Lập trình / Web</button>
-            <button class="preset-chip-btn" onclick="applyBreakdownPreset('slide')">📊 Thuyết trình / Slide nhóm</button>
+            <button class="preset-chip-btn" onclick="applyBreakdownPreset('essay')">📝 Tiểu luận</button>
+            <button class="preset-chip-btn" onclick="applyBreakdownPreset('coding')">💻 Đồ án CNTT</button>
+            <button class="preset-chip-btn" onclick="applyBreakdownPreset('slide')">📊 Thuyết trình</button>
           </div>
         </div>
 
         <div class="breakdown-preview-panel">
           <div class="preview-header-bar">
-            <strong>Danh sách thẻ task 25 phút được chia nhỏ:</strong>
+            <strong>Danh sách phiên 25 phút:</strong>
             <span class="badge-gold-pill">+50 EXP mỗi thẻ</span>
           </div>
           <div id="breakdownTasksPreview" class="breakdown-items-container">
@@ -601,7 +609,7 @@
       <div class="modal-footer">
         <button class="btn-action-outline" id="btnCancelBreakdown">Hủy</button>
         <button class="btn-action-primary" id="btnSaveBreakdown">
-          <span>Áp dụng vào Bảng Kanban</span>
+          <span>Áp dụng vào Kanban</span>
         </button>
       </div>
     </div>
@@ -614,13 +622,13 @@
       <div class="modal-header">
         <div class="modal-title-wrap">
           <span class="modal-icon">📢</span>
-          <h3 class="modal-title">GỬI PING CHO @MINH</h3>
+          <h3 class="modal-title">GỬI PING @MINH</h3>
         </div>
         <button class="btn-close-modal" id="btnClosePing">✕</button>
       </div>
 
       <div class="modal-body">
-        <p class="modal-intro">Chọn lời nhắn khích lệ để cùng bạn học vượt qua deadline:</p>
+        <p class="modal-intro">Chọn lời nhắn khích lệ:</p>
         
         <div class="ping-preset-list">
           <button class="ping-select-card" onclick="sendSelectedPing('Cố lên bạn ơi, hôm nay nhất định xong 3 task! 🔥')">
@@ -644,34 +652,34 @@
 
       <div class="modal-footer">
         <button class="btn-action-primary full-width" id="btnConfirmSendCustomPing">
-          <span>Gửi Ping ngay 🚀</span>
+          <span>Gửi Ping 🚀</span>
         </button>
       </div>
     </div>
   </div>
 
 
-  <!-- Modal 3: Vé Giải Trí Không Tội Lỗi (Guilt-Free Pass Timer) -->
+  <!-- Modal 3: Vé Giải Trí Chính Đáng -->
   <div class="modal-overlay" id="modalRewardPass">
     <div class="modal-window pass-ticket-window">
       <div class="ticket-header-bar">
-        <span class="ticket-subbrand">STUDY QUEST • GUILT-FREE REWARD PASS</span>
+        <span class="ticket-subbrand">STUDY QUEST • REWARD PASS</span>
         <button class="btn-close-modal text-white" id="btnCloseRewardPass">✕</button>
       </div>
       <div class="ticket-body-content">
         <span class="ticket-emoji-large" id="passRewardIcon">🎮</span>
         <h3 class="ticket-heading" id="passRewardTitle">Chơi 1 trận game</h3>
         <p class="ticket-rule-desc">
-          ✅ Đã trừ <strong id="passCostText">100 EXP</strong>. Bạn đã làm việc chăm chỉ, giờ hãy tận hưởng trọn vẹn mà KHÔNG CẦN TỘI LỖI!
+          ✅ Đã trừ <strong id="passCostText">100 EXP</strong>. Bạn đã cố gắng rồi, hãy tận hưởng mà không cần áy náy!
         </p>
 
         <div class="ticket-countdown-clock">
           <div class="clock-digits" id="passTimerClock">20:00</div>
-          <span class="clock-label">Thời gian giải trí chính đáng còn lại</span>
+          <span class="clock-label">Thời gian giải trí còn lại</span>
         </div>
 
         <button class="btn-ticket-finish" id="btnFinishLeisure">
-          Đã chơi xong & Quay lại học 📚
+          Xong & Quay lại học 📚
         </button>
       </div>
     </div>
@@ -684,14 +692,14 @@
       <div class="modal-header">
         <div class="modal-title-wrap">
           <span class="modal-icon">➕</span>
-          <h3 class="modal-title">TẠO THẺ TASK 25 PHÚT</h3>
+          <h3 class="modal-title">THÊM VIỆC MỚI</h3>
         </div>
         <button class="btn-close-modal" id="btnCloseNewTask">✕</button>
       </div>
 
       <div class="modal-body">
         <div class="form-group">
-          <label class="form-label" for="taskTitleInput">Tên việc cụ thể:</label>
+          <label class="form-label" for="taskTitleInput">Tên việc:</label>
           <input type="text" id="taskTitleInput" class="form-input" placeholder="VD: Tìm 3 tài liệu tiểu luận">
         </div>
 
@@ -703,14 +711,87 @@
         <div class="form-group">
           <label class="checkbox-label-row">
             <input type="checkbox" id="addToTop3Checkbox" checked>
-            <span>Thêm vào <strong>Top 3 Focus Hôm nay</strong></span>
+            <span>Thêm vào <strong>Top 3 hôm nay</strong></span>
           </label>
         </div>
       </div>
 
       <div class="modal-footer">
         <button class="btn-action-outline" id="btnCancelNewTask">Hủy</button>
-        <button class="btn-action-primary" id="btnSaveNewTask">Tạo task (+50 EXP)</button>
+        <button class="btn-action-primary" id="btnSaveNewTask">Tạo việc (+50 EXP)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Đánh Giá & Góp Ý (App Feedback & Rating) -->
+  <div class="modal-overlay" id="modalFeedback">
+    <div class="modal-window modal-narrow feedback-modal-window">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-icon">⭐</span>
+          <h3 class="modal-title">ĐÁNH GIÁ STUDYQUEST</h3>
+        </div>
+        <button class="btn-close-modal" id="btnCloseFeedback">✕</button>
+      </div>
+
+      <!-- Feedback Form Body -->
+      <div class="modal-body" id="feedbackFormBody">
+        <p class="modal-intro">
+          Chia sẻ trải nghiệm của bạn để StudyQuest ngày càng hữu ích hơn!
+        </p>
+
+        <!-- Star Rating -->
+        <div class="rating-stars-section">
+          <div class="stars-row" id="feedbackStarsRow">
+            <span class="star-item active" data-rating="1">★</span>
+            <span class="star-item active" data-rating="2">★</span>
+            <span class="star-item active" data-rating="3">★</span>
+            <span class="star-item active" data-rating="4">★</span>
+            <span class="star-item active" data-rating="5">★</span>
+          </div>
+          <span class="rating-desc-text" id="ratingDescText">Tuyệt vời! Cực kỳ hài lòng 🌟</span>
+        </div>
+
+        <!-- Quick Tag Pills -->
+        <div class="form-group">
+          <label class="form-label">Điểm bạn tâm đắc nhất:</label>
+          <div class="feedback-tags-grid" id="feedbackTagsGrid">
+            <button type="button" class="feedback-tag-chip active" data-tag="anti-delay">⚡ Vượt lười 5 phút</button>
+            <button type="button" class="feedback-tag-chip active" data-tag="pomodoro">⏱️ Pomodoro 25M</button>
+            <button type="button" class="feedback-tag-chip" data-tag="top3">🎯 Top 3 việc ngày</button>
+            <button type="button" class="feedback-tag-chip" data-tag="guilt-free">🎮 Quầy giải trí</button>
+            <button type="button" class="feedback-tag-chip" data-tag="minimal-ui">🎨 Giao diện tối giản</button>
+            <button type="button" class="feedback-tag-chip" data-tag="suggestion">💡 Góp ý thêm tính năng</button>
+          </div>
+        </div>
+
+        <!-- Textarea Comment -->
+        <div class="form-group">
+          <label class="form-label" for="feedbackCommentInput">Nhận xét hoặc góp ý:</label>
+          <textarea id="feedbackCommentInput" class="form-input form-textarea" rows="3" maxlength="300" placeholder="Chia sẻ cảm nhận của bạn về ứng dụng..."></textarea>
+          <div class="textarea-counter"><span id="feedbackCharCount">0</span>/300 ký tự</div>
+        </div>
+
+        <!-- Previous Feedback history if present -->
+        <div class="prev-feedback-badge" id="prevFeedbackBanner" style="display: none;">
+          <span class="prev-badge-icon">✓</span>
+          <span id="prevFeedbackText">Bạn đã đánh giá 5 sao vào hôm nay</span>
+        </div>
+      </div>
+
+      <!-- Success Thank You State (Shown after submitting) -->
+      <div class="modal-body feedback-success-view" id="feedbackSuccessView" style="display: none;">
+        <div class="success-content-box">
+          <span class="success-stars-celebrate">⭐⭐⭐⭐⭐</span>
+          <h3 class="success-heading">CẢM ƠN BẠN ĐÃ ĐÁNH GIÁ!</h3>
+          <p class="success-sub">Phản hồi của bạn đã được ghi nhận. StudyQuest chúc bạn học tập hiệu quả và vượt qua mọi deadline!</p>
+          <div class="success-feedback-summary" id="successSummaryBox"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer" id="feedbackModalFooter">
+        <button class="btn-action-outline" id="btnCancelFeedback">Đóng</button>
+        <button class="btn-action-primary" id="btnSubmitFeedback">Gửi đánh giá 🚀</button>
       </div>
     </div>
   </div>

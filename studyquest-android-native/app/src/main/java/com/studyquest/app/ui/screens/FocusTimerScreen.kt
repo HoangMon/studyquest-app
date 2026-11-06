@@ -140,7 +140,7 @@ fun FocusTimerScreen(
                     color = NavyPrimary
                 )
                 Text(
-                    text = if (timerState.mode == "5min") "QUY TẮC 5 PHÚT\nKHỞI ĐỘNG" else "POMODORO 25M\nTẬP TRUNG",
+                    text = if (timerState.mode == "5min") "5 PHÚT KHỞI ĐỘNG" else "POMODORO 25M",
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     color = BluePrimary,
@@ -185,12 +185,12 @@ fun FocusTimerScreen(
 
         Spacer(modifier = Modifier.height(14.dp))
 
-        // Two Decision Buttons (Nghỉ ngơi vs Làm tiếp)
+        // Two Decision Buttons (Dừng lại vs Làm tiếp)
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            // Nghỉ ngơi button
+            // Dừng lại button
             Box(
                 modifier = Modifier
                     .weight(1f)
@@ -205,8 +205,8 @@ fun FocusTimerScreen(
                     Text("🔴", fontSize = 12.sp)
                     Spacer(modifier = Modifier.width(6.dp))
                     Column {
-                        Text("Nghỉ ngơi", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color(0xFFB91C1C))
-                        Text("(Không có EXP)", fontSize = 10.sp, color = Color(0xFFB91C1C).copy(alpha = 0.8f))
+                        Text("Dừng lại", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color(0xFFB91C1C))
+                        Text("Nghỉ ngơi", fontSize = 10.sp, color = Color(0xFFB91C1C).copy(alpha = 0.8f))
                     }
                 }
             }
@@ -226,7 +226,7 @@ fun FocusTimerScreen(
                     Spacer(modifier = Modifier.width(6.dp))
                     Column {
                         Text("Làm tiếp", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color.White)
-                        Text("(Vào 25m • +50 EXP)", fontSize = 10.sp, color = Color.White.copy(alpha = 0.85f))
+                        Text("Pomodoro +50 EXP", fontSize = 10.sp, color = Color.White.copy(alpha = 0.85f))
                     }
                 }
             }

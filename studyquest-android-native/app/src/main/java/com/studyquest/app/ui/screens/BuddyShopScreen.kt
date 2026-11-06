@@ -84,7 +84,7 @@ fun BuddyShopScreen(
                             Text("💙", fontSize = 16.sp)
                             Spacer(modifier = Modifier.width(6.dp))
                             Text(
-                                text = "GÓC ĐỒNG HÀNH",
+                                text = "BẠN ĐỒNG HÀNH",
                                 fontWeight = FontWeight.ExtraBold,
                                 fontSize = 14.sp,
                                 color = NavyPrimary
@@ -143,7 +143,7 @@ fun BuddyShopScreen(
                         colors = ButtonDefaults.buttonColors(containerColor = BluePrimary)
                     ) {
                         Text(
-                            text = "[ Gửi Ping ]",
+                            text = "Gửi Ping",
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 14.sp
                         )
@@ -166,7 +166,7 @@ fun BuddyShopScreen(
             }
         }
 
-        // Section 2: QUẦY ĐỔI GIẢI TRÍ "KHÔNG TỘI LỖI"
+        // Section 2: QUẦY GIẢI TRÍ
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -180,13 +180,13 @@ fun BuddyShopScreen(
                         Spacer(modifier = Modifier.width(6.dp))
                         Column {
                             Text(
-                                text = "QUẦY ĐỔI GIẢI TRÍ \"KHÔNG TỘI LỖI\"",
+                                text = "QUẦY GIẢI TRÍ",
                                 fontWeight = FontWeight.ExtraBold,
                                 fontSize = 13.sp,
                                 color = NavyPrimary
                             )
                             Text(
-                                text = "Chìm khử dụng: ${userProfile.availableExp} EXP",
+                                text = "Khả dụng: ${userProfile.availableExp} EXP",
                                 fontSize = 11.sp,
                                 color = GoldExp,
                                 fontWeight = FontWeight.Bold

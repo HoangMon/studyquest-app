@@ -350,24 +350,24 @@ const FocusTimer = {
     if (newMode === '5min') {
       this.totalSeconds = 300;
       this.remainingSeconds = 300;
-      document.getElementById('focusModeBadge').innerText = "QUY TẮC 5 PHÚT";
-      document.getElementById('timerModeCaption').innerText = "QUY TẮC 5 PHÚT KHỞI ĐỘNG";
+      document.getElementById('focusModeBadge').innerText = "5 PHÚT";
+      document.getElementById('timerModeCaption').innerText = "5 PHÚT KHỞI ĐỘNG";
       document.getElementById('encourageText').innerText =
-        "Bạn chỉ cần làm trong 5 phút. Hết giờ, bạn hoàn toàn có quyền dừng lại mà không có tội gì!";
+        "Chỉ cần làm 5 phút. Hết giờ, bạn có thể nghỉ mà không áy náy.";
     } else if (newMode === '25min') {
       this.totalSeconds = 1500;
       this.remainingSeconds = 1500;
-      document.getElementById('focusModeBadge').innerText = "POMODORO 25 PHÚT";
+      document.getElementById('focusModeBadge').innerText = "POMODORO 25M";
       document.getElementById('timerModeCaption').innerText = "TẬP TRUNG SÂU (+50 EXP)";
       document.getElementById('encourageText').innerText =
-        "Tuyệt vời! Bạn đang trong trạng thái dòng chảy (flow state). Hãy tập trung cho mục tiêu này!";
+        "Bạn đang trong trạng thái tập trung sâu. Tiếp tục duy trì nhé!";
     } else if (newMode === 'break') {
       this.totalSeconds = 300;
       this.remainingSeconds = 300;
-      document.getElementById('focusModeBadge').innerText = "NGHỈ GIẢI LAO 5M";
-      document.getElementById('timerModeCaption').innerText = "THƯ GIÃN KHÔNG TỘI LỖI";
+      document.getElementById('focusModeBadge').innerText = "NGHỈ 5M";
+      document.getElementById('timerModeCaption').innerText = "NGHỈ GIẢI LAO";
       document.getElementById('encourageText').innerText =
-        "Hãy vươn vai, uống nước và rời mắt khỏi màn hình một chút nhé!";
+        "Vươn vai, uống nước và thư giãn một chút nhé!";
     }
 
     document.querySelectorAll('.mode-tab-item').forEach(pill => {
@@ -573,7 +573,7 @@ function startTaskInFocus(taskId) {
   FocusTimer.start();
 
   document.getElementById('focusTargetTitle').innerText = task.title;
-  document.getElementById('focusTargetMeta').innerText = `${task.subject} • Dự kiến 1 phiên 25m • +${task.exp} EXP`;
+  document.getElementById('focusTargetMeta').innerText = `${task.subject} • 25m • +${task.exp} EXP`;
 
   showToast(`Bắt đầu 5 phút cho: "${task.title}"!`, "🎯");
 }
@@ -726,7 +726,7 @@ function renderUI() {
   if (shopWidgetExp) shopWidgetExp.innerText = `${appState.user.availableExp} EXP`;
   if (shopTime) {
     const minutes = Math.floor(appState.user.availableExp / 5);
-    shopTime.innerText = `(~ ${minutes} phút giải trí)`;
+    shopTime.innerText = `(~ ${minutes} phút)`;
   }
 
   // 4. Focus Tasks List
@@ -735,7 +735,7 @@ function renderUI() {
   const doneCount = top3Tasks.filter(t => t.status === 'done').length;
 
   const badgeCount = document.getElementById('focusCountBadge');
-  if (badgeCount) badgeCount.innerText = `${doneCount}/${top3Tasks.length} Task`;
+  if (badgeCount) badgeCount.innerText = `${doneCount}/${top3Tasks.length} việc`;
 
   if (focusList) {
     focusList.innerHTML = top3Tasks.map(task => {
@@ -774,7 +774,7 @@ function renderUI() {
     const titleEl = document.getElementById('focusTargetTitle');
     const metaEl = document.getElementById('focusTargetMeta');
     if (titleEl) titleEl.innerText = currentTask.title;
-    if (metaEl) metaEl.innerText = `${currentTask.subject} • Dự kiến 1 phiên 25m • +${currentTask.exp} EXP`;
+    if (metaEl) metaEl.innerText = `${currentTask.subject} • 25m • +${currentTask.exp} EXP`;
   }
 }
 
@@ -845,9 +845,205 @@ function switchScreen(targetScreenId) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// ============================================================================
+// 11. APP FEEDBACK & RATING ENGINE
+// ============================================================================
+const FeedbackManager = {
+  selectedRating: 5,
+  ratingLabels: {
+    1: "Cần cải thiện nhiều 😕",
+    2: "Tạm ổn, cần bổ sung 🙂",
+    3: "Khá tốt, dùng ổn 👍",
+    4: "Rất thích, hữu ích ✨",
+    5: "Tuyệt vời! Cực kỳ hài lòng 🌟"
+  },
+
+  init() {
+    // Star Rating click & hover
+    const stars = document.querySelectorAll('#feedbackStarsRow .star-item');
+    stars.forEach(star => {
+      star.addEventListener('click', (e) => {
+        const val = parseInt(e.currentTarget.dataset.rating, 10);
+        this.setRating(val);
+      });
+      star.addEventListener('mouseenter', (e) => {
+        const val = parseInt(e.currentTarget.dataset.rating, 10);
+        this.highlightStars(val);
+      });
+    });
+
+    const starsRow = document.getElementById('feedbackStarsRow');
+    if (starsRow) {
+      starsRow.addEventListener('mouseleave', () => {
+        this.highlightStars(this.selectedRating);
+      });
+    }
+
+    // Quick tag chips toggle
+    document.querySelectorAll('.feedback-tag-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        chip.classList.toggle('active');
+        SoundEngine.click();
+      });
+    });
+
+    // Textarea character count
+    const commentInput = document.getElementById('feedbackCommentInput');
+    const charCount = document.getElementById('feedbackCharCount');
+    if (commentInput && charCount) {
+      commentInput.addEventListener('input', () => {
+        charCount.innerText = commentInput.value.length;
+      });
+    }
+
+    // Modal Trigger Buttons
+    const btnOpenFeedback = document.getElementById('btnOpenFeedback');
+    const mobileBtnFeedback = document.getElementById('mobileBtnFeedback');
+    const btnCloseFeedback = document.getElementById('btnCloseFeedback');
+    const btnCancelFeedback = document.getElementById('btnCancelFeedback');
+    const btnSubmitFeedback = document.getElementById('btnSubmitFeedback');
+
+    if (btnOpenFeedback) {
+      btnOpenFeedback.addEventListener('click', () => this.open());
+    }
+    if (mobileBtnFeedback) {
+      mobileBtnFeedback.addEventListener('click', () => this.open());
+    }
+    if (btnCloseFeedback) {
+      btnCloseFeedback.addEventListener('click', () => this.close());
+    }
+    if (btnCancelFeedback) {
+      btnCancelFeedback.addEventListener('click', () => this.close());
+    }
+    if (btnSubmitFeedback) {
+      btnSubmitFeedback.addEventListener('click', () => this.submit());
+    }
+
+    this.loadSavedHistory();
+  },
+
+  setRating(val) {
+    this.selectedRating = val;
+    this.highlightStars(val);
+    const desc = document.getElementById('ratingDescText');
+    if (desc) desc.innerText = this.ratingLabels[val] || '';
+    SoundEngine.click();
+  },
+
+  highlightStars(val) {
+    const stars = document.querySelectorAll('#feedbackStarsRow .star-item');
+    stars.forEach(s => {
+      const r = parseInt(s.dataset.rating, 10);
+      s.classList.toggle('active', r <= val);
+    });
+  },
+
+  open() {
+    SoundEngine.click();
+    const modal = document.getElementById('modalFeedback');
+    if (!modal) return;
+
+    // Reset view states
+    const formBody = document.getElementById('feedbackFormBody');
+    const successView = document.getElementById('feedbackSuccessView');
+    const footer = document.getElementById('feedbackModalFooter');
+
+    if (formBody) formBody.style.display = 'block';
+    if (successView) successView.style.display = 'none';
+    if (footer) footer.style.display = 'flex';
+
+    this.setRating(this.selectedRating);
+    this.loadSavedHistory();
+    modal.classList.add('active');
+  },
+
+  close() {
+    const modal = document.getElementById('modalFeedback');
+    if (modal) modal.classList.remove('active');
+  },
+
+  loadSavedHistory() {
+    try {
+      const list = JSON.parse(localStorage.getItem('studyquest_feedbacks') || '[]');
+      const banner = document.getElementById('prevFeedbackBanner');
+      const text = document.getElementById('prevFeedbackText');
+      if (list && list.length > 0) {
+        const last = list[list.length - 1];
+        if (banner && text) {
+          banner.style.display = 'flex';
+          text.innerText = `Đánh giá gần nhất của bạn: ${'★'.repeat(last.rating)} (${last.date})`;
+        }
+      }
+    } catch (e) {}
+  },
+
+  submit() {
+    const commentInput = document.getElementById('feedbackCommentInput');
+    const comment = commentInput ? commentInput.value.trim() : '';
+
+    const activeTags = [];
+    document.querySelectorAll('.feedback-tag-chip.active').forEach(chip => {
+      activeTags.push(chip.innerText.trim());
+    });
+
+    const now = new Date();
+    const dateFormatted = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')} - ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+
+    const feedbackItem = {
+      id: Date.now(),
+      rating: this.selectedRating,
+      ratingLabel: this.ratingLabels[this.selectedRating],
+      tags: activeTags,
+      comment: comment,
+      date: dateFormatted,
+      user: appState.user.name
+    };
+
+    let feedbacks = [];
+    try {
+      feedbacks = JSON.parse(localStorage.getItem('studyquest_feedbacks') || '[]');
+    } catch (e) {
+      feedbacks = [];
+    }
+    feedbacks.push(feedbackItem);
+    try {
+      localStorage.setItem('studyquest_feedbacks', JSON.stringify(feedbacks));
+    } catch (e) {}
+
+    SoundEngine.success();
+    ConfettiEngine.fire();
+    showToast("Cảm ơn bạn đã đóng góp ý kiến! ⭐", "🎉");
+
+    // Show success view
+    const formBody = document.getElementById('feedbackFormBody');
+    const successView = document.getElementById('feedbackSuccessView');
+    const footer = document.getElementById('feedbackModalFooter');
+    const summaryBox = document.getElementById('successSummaryBox');
+
+    if (formBody) formBody.style.display = 'none';
+    if (footer) footer.style.display = 'none';
+
+    if (summaryBox) {
+      summaryBox.innerHTML = `
+        <div><strong>Xếp hạng:</strong> ${'★'.repeat(feedbackItem.rating)} (${feedbackItem.ratingLabel})</div>
+        ${feedbackItem.tags.length > 0 ? `<div style="margin-top:5px;"><strong>Điểm tâm đắc:</strong> ${feedbackItem.tags.join(', ')}</div>` : ''}
+        ${feedbackItem.comment ? `<div style="margin-top:5px;"><strong>Góp ý:</strong> "${feedbackItem.comment}"</div>` : ''}
+        <button class="btn-action-primary full-width" style="margin-top:14px;" onclick="FeedbackManager.close()">Hoàn tất</button>
+      `;
+    }
+
+    if (successView) {
+      successView.style.display = 'block';
+    }
+
+    this.loadSavedHistory();
+  }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   renderUI();
   ConfettiEngine.init();
+  FeedbackManager.init();
 
   // Desktop Nav Click
   document.querySelectorAll('.nav-link-btn').forEach(btn => {
@@ -860,6 +1056,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Mobile Bottom Nav Click
   document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (btn.id === 'mobileBtnFeedback') {
+        FeedbackManager.open();
+        return;
+      }
       const scr = btn.dataset.screen;
       if (scr) switchScreen(scr);
     });

@@ -22,7 +22,7 @@ data class TimerUiState(
     val isRunning: Boolean = false,
     val activeTaskTitle: String = "Viết dàn ý đề cương chi tiết",
     val activeTaskMeta: String = "Tư duy luận ĐC • 25m • +50 EXP",
-    val promptMessage: String = "Bạn chỉ cần làm trong 5 phút, hết giờ, bạn hoàn toàn có quyền dừng lại mà không có tội gì."
+    val promptMessage: String = "Chỉ cần làm 5 phút. Hết giờ, bạn có thể nghỉ mà không áy náy."
 )
 
 class StudyQuestViewModel : ViewModel() {
@@ -107,7 +107,7 @@ class StudyQuestViewModel : ViewModel() {
             totalSeconds = 300,
             isRunning = true,
             activeTaskTitle = title,
-            promptMessage = "Bạn chỉ cần làm trong 5 phút, hết giờ, bạn hoàn toàn có quyền dừng lại mà không có tội gì."
+            promptMessage = "Chỉ cần làm 5 phút. Hết giờ, bạn có thể nghỉ mà không áy náy."
         )
         startTicking()
     }
